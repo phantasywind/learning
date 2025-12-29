@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>猜数字小游戏</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>猜数字小游戏</h1>
+        <p>点击开始后，通过数字键盘输入 1~99 的整数进行猜测。</p>
+      </header>
+
+      <section class="controls">
+        <button id="start-btn" type="button">开始游戏</button>
+        <button id="reset-btn" type="button">重来</button>
+      </section>
+
+      <section class="guess-area">
+        <div class="guess-display">
+          <label for="guess-input">你的猜测</label>
+          <input
+            id="guess-input"
+            type="text"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            placeholder="1~99"
+            readonly
+          />
+          <button id="submit-btn" type="button">提交猜测</button>
+        </div>
+        <div class="keypad" aria-label="数字键盘">
+          <button class="keypad-key" data-key="1" type="button">1</button>
+          <button class="keypad-key" data-key="2" type="button">2</button>
+          <button class="keypad-key" data-key="3" type="button">3</button>
+          <button class="keypad-key" data-key="4" type="button">4</button>
+          <button class="keypad-key" data-key="5" type="button">5</button>
+          <button class="keypad-key" data-key="6" type="button">6</button>
+          <button class="keypad-key" data-key="7" type="button">7</button>
+          <button class="keypad-key" data-key="8" type="button">8</button>
+          <button class="keypad-key" data-key="9" type="button">9</button>
+          <button class="keypad-key keypad-key--action" data-action="clear" type="button">
+            清空
+          </button>
+          <button class="keypad-key" data-key="0" type="button">0</button>
+          <button class="keypad-key keypad-key--action" data-action="backspace" type="button">
+            退格
+          </button>
+        </div>
+      </section>
+
+      <section class="status-card">
+        <h2>状态</h2>
+        <p id="status-message">点击“开始游戏”开始。</p>
+        <p id="attempts">已猜次数：0</p>
+        <p id="history">历史记录：暂无</p>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

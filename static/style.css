@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #f5f6fa;
+  color: #2c3e50;
+}
+
+.container {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+header h1 {
+  margin-bottom: 8px;
+}
+
+.controls,
+.guess-area {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.guess-area {
+  flex-direction: column;
+}
+
+.guess-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #4b7bec;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+button:hover {
+  box-shadow: 0 6px 16px rgba(75, 123, 236, 0.25);
+}
+
+button:disabled {
+  background: #c7d2fe;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+input {
+  padding: 10px 12px;
+  border: 1px solid #dcdde1;
+  border-radius: 8px;
+  width: 160px;
+  font-size: 14px;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(80px, 1fr));
+  gap: 12px;
+}
+
+.keypad-key {
+  padding: 14px 0;
+  font-size: 16px;
+}
+
+.keypad-key--action {
+  background: #57606f;
+}
+
+.keypad-key--action:hover {
+  box-shadow: 0 6px 16px rgba(87, 96, 111, 0.25);
+}
+
+.status-card {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f8f9ff;
+  border-radius: 12px;
+  border: 1px solid #e9ecff;
+}
+
+.status-card p {
+  margin: 8px 0;
+}
