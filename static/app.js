@@ -5,6 +5,7 @@ const guessInput = document.getElementById("guess-input");
 const statusMessage = document.getElementById("status-message");
 const attemptsText = document.getElementById("attempts");
 const historyText = document.getElementById("history");
+const keypadKeys = document.querySelectorAll(".keypad-key");
 
 const updateUI = (data) => {
   statusMessage.textContent = data.message;
@@ -18,6 +19,9 @@ const updateUI = (data) => {
   const isActive = Boolean(data.active);
   guessInput.disabled = !isActive;
   submitButton.disabled = !isActive;
+  keypadKeys.forEach((key) => {
+    key.disabled = !isActive;
+  });
   if (!isActive) {
     guessInput.value = "";
   }
@@ -48,13 +52,34 @@ resetButton.addEventListener("click", () => {
 });
 
 submitButton.addEventListener("click", () => {
-  postJSON("/api/guess", { guess: guessInput.value });
+  postJSON("/api/guess", { guess: guessInput.value }).finally(() => {
+    guessInput.value = "";
+  });
 });
 
-guessInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    submitButton.click();
-  }
+keypadKeys.forEach((key) => {
+  key.addEventListener("click", () => {
+    const action = key.dataset.action;
+    if (action === "clear") {
+      guessInput.value = "";
+      return;
+    }
+    if (action === "backspace") {
+      guessInput.value = guessInput.value.slice(0, -1);
+      return;
+    }
+    const digit = key.dataset.key;
+    if (!digit) {
+      return;
+    }
+    if (guessInput.value.length >= 2) {
+      return;
+    }
+    if (guessInput.value.length === 0 && digit === "0") {
+      return;
+    }
+    guessInput.value = `${guessInput.value}${digit}`;
+  });
 });
 
 updateUI({ message: "点击“开始游戏”开始。", attempts: 0, history: [], active: false });

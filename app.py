@@ -10,7 +10,7 @@ app.secret_key = secrets.token_hex(16)
 
 
 def _init_game() -> None:
-    session["target"] = secrets.randbelow(100) + 1
+    session["target"] = secrets.randbelow(99) + 1
     session["attempts"] = 0
     session["history"] = []
     session["active"] = True
@@ -34,7 +34,7 @@ def index() -> str:
 @app.post("/api/start")
 def start_game() -> tuple[str, int] | tuple[dict[str, Any], int]:
     _init_game()
-    return jsonify(_game_state("游戏已开始，猜一个 1~100 的数字。", "started")), 200
+    return jsonify(_game_state("游戏已开始，猜一个 1~99 的数字。", "started")), 200
 
 
 @app.post("/api/reset")
@@ -62,8 +62,8 @@ def guess() -> tuple[dict[str, Any], int]:
     except (TypeError, ValueError):
         return jsonify(_game_state("请输入有效的整数。", "invalid")), 400
 
-    if not 1 <= guess_value <= 100:
-        return jsonify(_game_state("数字需要在 1~100 之间。", "invalid")), 400
+    if not 1 <= guess_value <= 99:
+        return jsonify(_game_state("数字需要在 1~99 之间。", "invalid")), 400
 
     session["attempts"] = session.get("attempts", 0) + 1
     history = session.get("history", [])
