@@ -70,14 +70,13 @@ keypadKeys.forEach((key) => {
     if (!digit) {
       return;
     }
-    if (guessInput.value.length >= 2) {
+    if (guessInput.value.length >= 3) {
       return;
     }
-    if (guessInput.value === "0") {
-      guessInput.value = digit;
-    } else {
-      guessInput.value = `${guessInput.value}${digit}`;
+    if (guessInput.value.length === 0 && digit === "0") {
+      return;
     }
+    guessInput.value = `${guessInput.value}${digit}`;
   });
 });
 
